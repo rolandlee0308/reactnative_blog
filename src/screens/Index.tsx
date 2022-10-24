@@ -1,13 +1,11 @@
-import { View, Text } from "react-native";
+import { View } from "react-native";
+import { Text } from 'react-native-paper'
 import React from "react";
-import { useAppSelector } from "../../redux/hooks";
 
 export default function Index() {
-  const { temp } = useAppSelector((state) => state.glob);
   return (
     <View>
       <Text>Index</Text>
-      <Text>{temp}</Text>
     </View>
   );
 }

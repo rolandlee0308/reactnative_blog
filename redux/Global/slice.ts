@@ -3,10 +3,14 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 export const globalSlice = createSlice({
   name: "global",
   initialState: {
-    temp: 5,
+    isThemeDark: false,
   },
-  reducers: {},
+  reducers: {
+    toggleTheme: (state) => {
+      state.isThemeDark = !state.isThemeDark;
+    },
+  },
 });
 
-export const {} = globalSlice.actions;
+export const { toggleTheme } = globalSlice.actions;
 export default globalSlice.reducer;
