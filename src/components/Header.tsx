@@ -1,5 +1,5 @@
 import React from "react";
-import { useTheme, Appbar, Switch, Text } from "react-native-paper";
+import { useTheme, Appbar, Switch, Text, FAB, Portal, Provider } from "react-native-paper";
 import { toggleTheme } from "../../redux/Global/slice";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 

@@ -9,12 +9,16 @@ import {
   Provider as PaperProvider,
   DarkTheme as PaperDarkTheme,
   DefaultTheme as PaperDefaultTheme,
+  Portal,
 } from "react-native-paper";
 import merge from "deepmerge";
 
 import IndexScreen from "../screens/Index";
+import ShowScreen from "../screens/Show";
+import CreateScreen from "../screens/Create";
 import { Header } from "../components/Header";
 import { useAppSelector } from "../../redux/hooks";
+import FABGroup from "../components/FABGroup";
 
 const CombinedDefaultTheme = merge(PaperDefaultTheme, NavigationDefaultTheme);
 const CombinedDarkTheme = merge(PaperDarkTheme, NavigationDarkTheme);
@@ -27,11 +31,27 @@ export default function Navigation() {
   return (
     <PaperProvider theme={theme}>
       <NavigationContainer theme={theme}>
-        <Stack.Navigator
-          initialRouteName="index"
-          screenOptions={{ header: (props) => <Header {...props} /> }}
-        >
-          <Stack.Screen name="index" component={IndexScreen} />
+        <Stack.Navigator initialRouteName="Blogs">
+          <Stack.Screen
+            name="Blogs"
+            options={{ header: (props) => <Header {...props} /> }}
+          >
+            {(props) => (
+              <>
+                <IndexScreen {...props} />
+                <FABGroup {...props} />
+              </>
+            )}
+          </Stack.Screen>
+          <Stack.Screen name="show">
+            {(props) => (
+              <>
+                <ShowScreen {...props} />
+                <FABGroup {...props} />
+              </>
+            )}
+          </Stack.Screen>
+          <Stack.Screen name="create" component={CreateScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </PaperProvider>

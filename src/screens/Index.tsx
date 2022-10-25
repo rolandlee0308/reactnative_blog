@@ -1,8 +1,8 @@
-import { FlatList, StyleSheet, View } from "react-native";
+import { FlatList, StyleSheet, View, TouchableOpacity } from "react-native";
 import { Text, Button, useTheme, IconButton } from "react-native-paper";
 import React from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { addBlogPost } from "../../redux/Global/slice";
+import { addBlogPost, deleteBlogPost } from "../../redux/Global/slice";
 
 const styles = StyleSheet.create({
   row: {
@@ -14,12 +14,11 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 18,
-    paddingVertical: 10
+    paddingVertical: 10,
   },
-
 });
 
-export default function Index() {
+export default function Index({ navigation }: any) {
   const { blogPosts } = useAppSelector((state) => state.glob);
   const dispatch = useAppDispatch();
   const theme = useTheme();
@@ -34,14 +33,20 @@ export default function Index() {
       </Button>
       <FlatList
         data={blogPosts}
-        keyExtractor={(item) => item.title}
+        keyExtractor={(item) => item.id as string}
         renderItem={({ item }) => (
-          <View style={styles.row}>
-            <Text style={styles.title}>
-              {item.title}
-            </Text>
-              <IconButton icon="delete" />
-          </View>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("show", { id: item.id })}
+          >
+            <View style={styles.row}>
+              <Text style={styles.title}>{item.title}</Text>
+              <TouchableOpacity
+                onPress={() => dispatch(deleteBlogPost(item.id))}
+              >
+                <IconButton icon="delete" />
+              </TouchableOpacity>
+            </View>
+          </TouchableOpacity>
         )}
       />
     </View>
