@@ -10,7 +10,7 @@ export default function Show({ route }: any) {
   const temp = blogPosts.find((item) => item.id === id);
   return (
     <View>
-      <Text>{temp?.title}</Text>
+      <Text>{temp?.content}</Text>
     </View>
   );
 }

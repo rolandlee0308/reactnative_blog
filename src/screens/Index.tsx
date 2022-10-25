@@ -24,19 +24,19 @@ export default function Index({ navigation }: any) {
   const theme = useTheme();
   return (
     <View>
-      <Button
+      {/* <Button
         mode="contained"
         color={theme?.colors.primary}
         onPress={() => dispatch(addBlogPost())}
       >
         Add Post
-      </Button>
+      </Button> */}
       <FlatList
         data={blogPosts}
         keyExtractor={(item) => item.id as string}
         renderItem={({ item }) => (
           <TouchableOpacity
-            onPress={() => navigation.navigate("show", { id: item.id })}
+            onPress={() => navigation.navigate("show", { id: item.id, title: item.title })}
           >
             <View style={styles.row}>
               <Text style={styles.title}>{item.title}</Text>

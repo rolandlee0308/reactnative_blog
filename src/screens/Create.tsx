@@ -1,13 +1,21 @@
-import { View } from "react-native";
-import { Text } from "react-native-paper";
-import React from "react";
-import { useAppSelector } from "../../redux/hooks";
+import React, { useState } from "react";
+import { addBlogPost } from "../../redux/Global/slice";
+import { useAppDispatch } from "../../redux/hooks";
 
-export default function Create({ route }: any) {
+import BlogPostForm from "../components/BlogPostForm";
 
+export default function Create({ navigation }: any) {
+  const dispatch = useAppDispatch();
   return (
-    <View>
-      <Text>Create</Text>
-    </View>
+    <BlogPostForm
+      onSubmit={async (title: string, content: string) => {
+        try {
+          await dispatch(addBlogPost({ title, content }));
+          navigation.navigate("Blogs");
+        } catch (error) {
+          console.error(error);
+        }
+      }}
+    />
   );
 }

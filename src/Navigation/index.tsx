@@ -16,6 +16,7 @@ import merge from "deepmerge";
 import IndexScreen from "../screens/Index";
 import ShowScreen from "../screens/Show";
 import CreateScreen from "../screens/Create";
+import EditScreen from "../screens/Edit";
 import { Header } from "../components/Header";
 import { useAppSelector } from "../../redux/hooks";
 import FABGroup from "../components/FABGroup";
@@ -43,7 +44,10 @@ export default function Navigation() {
               </>
             )}
           </Stack.Screen>
-          <Stack.Screen name="show">
+          <Stack.Screen
+            name="show"
+            options={({ route }: any) => ({ title: route.params.title })}
+          >
             {(props) => (
               <>
                 <ShowScreen {...props} />
@@ -51,7 +55,16 @@ export default function Navigation() {
               </>
             )}
           </Stack.Screen>
-          <Stack.Screen name="create" component={CreateScreen} />
+          <Stack.Screen
+            name="create"
+            component={CreateScreen}
+            options={{ title: "Create Blog Post" }}
+          />
+          <Stack.Screen
+            name="edit"
+            component={EditScreen}
+            options={{ title: "Edit Blog Post" }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </PaperProvider>
